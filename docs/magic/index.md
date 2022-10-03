@@ -1,9 +1,14 @@
-# docker+caddy+vless+xray+ws+tls 科学上网搭建
+---
+lang: zh-CN
+title: docker+caddy+vless+xray+ws+tls
+description: 科学上网搭建
+---
+# docker+caddy+vless+xray+ws+tls
 ## 准备阶段
 - 服务器一台
 - 域名一个
 - 域名已解析到服务器
-### 前置操作
+## 前置操作
 - 修改主机名（非必须）
 ```shell
 hostnamectl set-hostname debain

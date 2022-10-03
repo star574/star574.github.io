@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "docs:dev": "vuepress dev docs",
+    "dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
   "author": "star574",
