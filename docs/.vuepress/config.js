@@ -17,8 +17,8 @@ export default defineUserConfig({
                 link: '/',
             },
             {
-                text: '首页',
-                link: '/',
+                text: '科学上网',
+                link: '/magic',
             },
             {
                 text: '首页',
