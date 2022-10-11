@@ -21,8 +21,8 @@ export default defineUserConfig({
                 link: '/magic',
             },
             {
-                text: '首页',
-                link: '/',
+                text: 'docker',
+                link: '/docker',
             },
             {
                 text: '首页',
