@@ -227,6 +227,8 @@ docker update --restart=always $(docker ps -qa)
 ```
 
 ## 伪装网站
-
-- 静态网站放在html目录就行
+```shell
+iptables -t nat -A PREROUTING -p tcp --dport 40000:50000 -j REDIRECT --to-ports 443
+git clone https://github.com/star574/camouflage_html.git .
+```
 
