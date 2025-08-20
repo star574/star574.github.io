@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="generator" content="VuePress 2.0.0-beta.51">
+    <style>
+      :root {
+        --c-bg: #fff;
+      }
+      html.dark {
+        --c-bg: #22272e;
+      }
+      html, body {
+        background-color: var(--c-bg);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem('vuepress-color-scheme');
+			const systemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+			if (userMode === 'dark' || (userMode !== 'light' && systemDarkMode)) {
+				document.documentElement.classList.toggle('dark', true);
+			}
+    </script>
+    <link rel="icon" href="/images/logo.png"><title>docker+caddy+vless+xray+ws+tls | star574's blog</title><meta name="description" content="科学上网搭建">
+    <link rel="modulepreload" href="/assets/app.3ba3e4b9.js"><link rel="modulepreload" href="/assets/index.html.8394f5c1.js"><link rel="modulepreload" href="/assets/index.html.0d8b2211.js"><link rel="prefetch" href="/assets/index.html.b5126072.js"><link rel="prefetch" href="/assets/index.html.48bbf49f.js"><link rel="prefetch" href="/assets/404.html.c3e557d0.js"><link rel="prefetch" href="/assets/index.html.31dedaf9.js"><link rel="prefetch" href="/assets/index.html.6f5f5ae0.js"><link rel="prefetch" href="/assets/404.html.4a117e49.js">
+    <link rel="stylesheet" href="/assets/style.f4d22aab.css">
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="theme-container"><!--[--><header class="navbar"><div class="toggle-sidebar-button" title="toggle sidebar" aria-expanded="false" role="button" tabindex="0"><div class="icon" aria-hidden="true"><span></span><span></span><span></span></div></div><span><a href="/" class=""><!----><span class="site-name">star574&#39;s blog</span></a></span><div class="navbar-items-wrapper" style=""><!--[--><!--]--><nav class="navbar-items can-hide"><!--[--><div class="navbar-item"><a href="/" class="" aria-label="首页"><!--[--><!--]--> 首页 <!--[--><!--]--></a></div><div class="navbar-item"><a aria-current="page" href="/magic" class="router-link-active router-link-exact-active router-link-active" aria-label="科学上网"><!--[--><!--]--> 科学上网 <!--[--><!--]--></a></div><div class="navbar-item"><a href="/docker" class="" aria-label="docker"><!--[--><!--]--> docker <!--[--><!--]--></a></div><div class="navbar-item"><a href="/" class="" aria-label="首页"><!--[--><!--]--> 首页 <!--[--><!--]--></a></div><!--]--></nav><!--[--><!--]--><button class="toggle-color-mode-button" title="toggle color mode"><svg style="" class="icon" focusable="false" viewBox="0 0 32 32"><path d="M16 12.005a4 4 0 1 1-4 4a4.005 4.005 0 0 1 4-4m0-2a6 6 0 1 0 6 6a6 6 0 0 0-6-6z" fill="currentColor"></path><path d="M5.394 6.813l1.414-1.415l3.506 3.506L8.9 10.318z" fill="currentColor"></path><path d="M2 15.005h5v2H2z" fill="currentColor"></path><path d="M5.394 25.197L8.9 21.691l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 25.005h2v5h-2z" fill="currentColor"></path><path d="M21.687 23.106l1.414-1.415l3.506 3.506l-1.414 1.414z" fill="currentColor"></path><path d="M25 15.005h5v2h-5z" fill="currentColor"></path><path d="M21.687 8.904l3.506-3.506l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 2.005h2v5h-2z" fill="currentColor"></path></svg><svg style="display:none;" class="icon" focusable="false" viewBox="0 0 32 32"><path d="M13.502 5.414a15.075 15.075 0 0 0 11.594 18.194a11.113 11.113 0 0 1-7.975 3.39c-.138 0-.278.005-.418 0a11.094 11.094 0 0 1-3.2-21.584M14.98 3a1.002 1.002 0 0 0-.175.016a13.096 13.096 0 0 0 1.825 25.981c.164.006.328 0 .49 0a13.072 13.072 0 0 0 10.703-5.555a1.01 1.01 0 0 0-.783-1.565A13.08 13.08 0 0 1 15.89 4.38A1.015 1.015 0 0 0 14.98 3z" fill="currentColor"></path></svg></button><!----></div></header><!--]--><div class="sidebar-mask"></div><!--[--><aside class="sidebar"><nav class="navbar-items"><!--[--><div class="navbar-item"><a href="/" class="" aria-label="首页"><!--[--><!--]--> 首页 <!--[--><!--]--></a></div><div class="navbar-item"><a aria-current="page" href="/magic" class="router-link-active router-link-exact-active router-link-active" aria-label="科学上网"><!--[--><!--]--> 科学上网 <!--[--><!--]--></a></div><div class="navbar-item"><a href="/docker" class="" aria-label="docker"><!--[--><!--]--> docker <!--[--><!--]--></a></div><div class="navbar-item"><a href="/" class="" aria-label="首页"><!--[--><!--]--> 首页 <!--[--><!--]--></a></div><!--]--></nav><!--[--><!--]--><ul class="sidebar-items"><!--[--><li><p tabindex="0" class="sidebar-item sidebar-heading">docker+caddy+vless+xray+ws+tls <!----></p><ul style="" class="sidebar-item-children"><!--[--><li><a aria-current="page" href="/magic/#准备阶段" class="router-link-active router-link-exact-active sidebar-item" aria-label="准备阶段"><!--[--><!--]--> 准备阶段 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/magic/#前置操作" class="router-link-active router-link-exact-active sidebar-item" aria-label="前置操作"><!--[--><!--]--> 前置操作 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/magic/#安装xray" class="router-link-active router-link-exact-active sidebar-item" aria-label="安装xray"><!--[--><!--]--> 安装xray <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/magic/#caddy" class="router-link-active router-link-exact-active sidebar-item" aria-label="caddy"><!--[--><!--]--> caddy <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/magic/#开机自启动" class="router-link-active router-link-exact-active sidebar-item" aria-label="开机自启动"><!--[--><!--]--> 开机自启动 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/magic/#伪装网站" class="router-link-active router-link-exact-active sidebar-item" aria-label="伪装网站"><!--[--><!--]--> 伪装网站 <!--[--><!--]--></a><!----></li><li><a aria-current="page" href="/magic/#一键脚本" class="router-link-active router-link-exact-active sidebar-item" aria-label="一键脚本"><!--[--><!--]--> 一键脚本 <!--[--><!--]--></a><!----></li><!--]--></ul></li><!--]--></ul><!--[--><!--]--></aside><!--]--><!--[--><main class="page"><!--[--><!--]--><div class="theme-default-content"><!--[--><!--]--><div><h1 id="docker-caddy-vless-xray-ws-tls" tabindex="-1"><a class="header-anchor" href="#docker-caddy-vless-xray-ws-tls" aria-hidden="true">#</a> docker+caddy+vless+xray+ws+tls</h1><h2 id="准备阶段" tabindex="-1"><a class="header-anchor" href="#准备阶段" aria-hidden="true">#</a> 准备阶段</h2><ul><li>服务器一台</li><li>域名一个</li><li>域名已解析到服务器</li></ul><h2 id="前置操作" tabindex="-1"><a class="header-anchor" href="#前置操作" aria-hidden="true">#</a> 前置操作</h2><ul><li>修改主机名（非必须）</li></ul><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code>hostnamectl set-hostname debain
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><ul><li>speedtest 脚本（用于测试网络速度）</li></ul><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token function">wget</span> https://raw.github.com/sivel/speedtest-cli/master/speedtest.py
+<span class="token function">chmod</span> a+rx speedtest.py
+<span class="token function">mv</span> speedtest.py /usr/local/bin/speedtest
+<span class="token function">chown</span> root:root /usr/local/bin/speedtest
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li>traceroute 回城路由测试脚本</li></ul><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># CentOS：</span>
+yum <span class="token parameter variable">-y</span> update <span class="token operator">&amp;&amp;</span> yum <span class="token function">install</span> <span class="token function">traceroute</span> <span class="token parameter variable">-y</span>
+<span class="token comment"># Debian/Ubuntu：</span>
+<span class="token function">apt</span> update <span class="token parameter variable">-y</span> <span class="token operator">&amp;&amp;</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token function">traceroute</span> <span class="token parameter variable">-y</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li>更换内核脚本</li></ul><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code>不卸载内核版本
+<span class="token function">wget</span> <span class="token parameter variable">-O</span> tcpx.sh <span class="token string">&quot;https://git.io/JYxKU&quot;</span> <span class="token operator">&amp;&amp;</span> <span class="token function">chmod</span> +x tcpx.sh
+卸载内核版本
+<span class="token function">wget</span> <span class="token parameter variable">-O</span> tcp.sh <span class="token string">&quot;https://git.io/coolspeeda&quot;</span> <span class="token operator">&amp;&amp;</span> <span class="token function">chmod</span> +x tcp.sh 
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li>设置时区</li></ul><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code>timedatectl set-timezone Asia/Shanghai
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><ul><li>docker</li></ul><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token function">apt-get</span> remove <span class="token function">docker</span> docker-engine docker.io containerd runc
+<span class="token function">apt-get</span> update
+<span class="token function">apt-get</span> <span class="token function">install</span> <span class="token punctuation">\</span>
+    apt-transport-https <span class="token punctuation">\</span>
+    ca-certificates <span class="token punctuation">\</span>
+    <span class="token function">curl</span> <span class="token punctuation">\</span>
+    gnupg <span class="token punctuation">\</span>
+    lsb-release
+    
+<span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://download.docker.com/linux/debian/gpg <span class="token operator">|</span> gpg <span class="token parameter variable">--dearmor</span> <span class="token parameter variable">-o</span> /usr/share/keyrings/docker-archive-keyring.gpg
+
+<span class="token builtin class-name">echo</span> <span class="token punctuation">\</span>
+  <span class="token string">&quot;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+  <span class="token variable"><span class="token variable">$(</span>lsb_release <span class="token parameter variable">-cs</span><span class="token variable">)</span></span> stable&quot;</span> <span class="token operator">|</span> <span class="token function">tee</span> /etc/apt/sources.list.d/docker.list <span class="token operator">&gt;</span> /dev/null
+
+<span class="token function">apt-get</span> update
+<span class="token function">apt-get</span> <span class="token function">install</span> docker-ce docker-ce-cli containerd.io
+systemctl <span class="token builtin class-name">enable</span> <span class="token parameter variable">--now</span> <span class="token function">docker</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="安装xray" tabindex="-1"><a class="header-anchor" href="#安装xray" aria-hidden="true">#</a> 安装xray</h2><ul><li>创建配置文件</li></ul><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /docker/xray <span class="token operator">&amp;&amp;</span> <span class="token function">touch</span> /docker/xray/config.json
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><ul><li>写入配置文件 <ul><li>PORT换成自己想用的端口</li><li>PATH 代表websocket请求路径</li><li>UUID 任意uuid</li></ul></li></ul><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token function">cat</span> <span class="token operator">&lt;&lt;</span><span class="token string">EOF<span class="token bash punctuation"> <span class="token operator">&gt;</span>  /docker/xray/config.json</span>
+{
+  &quot;log&quot;: {
+    &quot;loglevel&quot;: &quot;error&quot;
+  },
+  &quot;routing&quot;: {
+    &quot;domainStrategy&quot;: &quot;IPOnDemand&quot;,
+    &quot;rules&quot;: [
+      {
+        &quot;type&quot;: &quot;field&quot;,
+        &quot;ip&quot;: [
+          &quot;geoip:private&quot;,
+          &quot;geoip:cn&quot;
+        ],
+        &quot;outboundTag&quot;: &quot;block&quot;
+      },
+      {
+        &quot;type&quot;: &quot;field&quot;,
+        &quot;protocol&quot;: [
+          &quot;bittorrent&quot;
+        ],
+        &quot;outboundTag&quot;: &quot;block&quot;
+      }
+    ]
+  },
+  &quot;inbounds&quot;: [
+    {
+      &quot;port&quot;: <span class="token variable">$PORT</span>,
+      &quot;listen&quot;: &quot;0.0.0.0&quot;,
+      &quot;protocol&quot;: &quot;vless&quot;,
+      &quot;settings&quot;: {
+        &quot;clients&quot;: [
+          {
+            &quot;id&quot;: &quot;<span class="token variable">$UUID</span>&quot;
+          }
+        ],
+        &quot;decryption&quot;: &quot;none&quot;
+      },
+      &quot;streamSettings&quot;: {
+        &quot;network&quot;: &quot;ws&quot;,
+        &quot;security&quot;: &quot;none&quot;,
+        &quot;wsSettings&quot;: {
+          &quot;path&quot;: &quot;/<span class="token environment constant">$PATH</span>&quot;
+        }
+      }
+    }
+  ],
+  &quot;outbounds&quot;: [
+    {
+      &quot;protocol&quot;: &quot;freedom&quot;,
+      &quot;settings&quot;: {
+        &quot;domainStrategy&quot;: &quot;AsIs&quot;
+      },
+      &quot;tag&quot;: &quot;direct&quot;
+    },
+    {
+      &quot;protocol&quot;: &quot;blackhole&quot;,
+      &quot;tag&quot;: &quot;block&quot;
+    }
+  ]
+}
+EOF</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li>安装xray <ul><li>映射 上面的 PORT</li></ul></li></ul><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">-p</span> <span class="token variable">$PORT</span><span class="token builtin class-name">:</span><span class="token variable">$PORT</span> <span class="token parameter variable">--name</span> xray <span class="token parameter variable">--restart</span><span class="token operator">=</span>always <span class="token parameter variable">-v</span> /docker/xray:/etc/xray <span class="token parameter variable">-v</span> /etc/localtime:/etc/localtime teddysun/xray
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2 id="caddy" tabindex="-1"><a class="header-anchor" href="#caddy" aria-hidden="true">#</a> caddy</h2><ul><li>准备映射的文件路径（html可以用于伪装网站）</li></ul><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>mkdir -p /docker/caddy/html
+mkdir -p /docker/caddy/data
+touch /docker/caddy/Caddyfile
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li>写入配置文件 <ul><li>NAME 用于链接到xray</li><li>EMAIL 用于申请证书的邮箱</li><li>DOMAIN 可以配置多个</li></ul></li></ul><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token function">cat</span> <span class="token operator">&lt;&lt;</span><span class="token string">EOF<span class="token bash punctuation"> <span class="token operator">&gt;</span>  /docker/caddy/Caddyfile</span>
+<span class="token variable">$DOMAIN1</span>, <span class="token variable">$DOMAIN2</span> {
+  tls <span class="token variable">$EMAIL</span>
+
+  # 静态资源
+  root * /srv
+  file_server
+  encode gzip
+
+  # 日志更详细
+  log {
+    output file /etc/caddy/caddy.log {
+      roll_size 10mb
+      roll_keep 10
+      roll_keep_for 720h
+    }
+    format single_field common_log
+  }
+
+  # WebSocket 转发给 xray
+  @xray_websocket {
+    path /<span class="token environment constant">$PATH</span>
+  }
+  reverse_proxy @xray_websocket <span class="token variable">$NAME</span>:<span class="token variable">$PORT</span>
+}
+EOF</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li>安装caddy</li></ul><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">-p</span> <span class="token number">80</span>:80 <span class="token parameter variable">-p</span> <span class="token number">443</span>:443 <span class="token parameter variable">-p</span> <span class="token number">443</span>:443/udp <span class="token punctuation">\</span>
+	<span class="token parameter variable">--link</span> <span class="token variable">$NAME</span>:xray <span class="token punctuation">\</span>
+    <span class="token parameter variable">-v</span> /docker/caddy/html:/srv <span class="token punctuation">\</span>
+    <span class="token parameter variable">-v</span> /docker/caddy/data:/data <span class="token punctuation">\</span>
+    <span class="token parameter variable">-v</span> /docker/caddy/Caddyfile:/etc/caddy/Caddyfile <span class="token punctuation">\</span>
+    <span class="token parameter variable">-v</span> /etc/localtime:/etc/localtime <span class="token punctuation">\</span>
+    <span class="token parameter variable">--name</span> caddy caddy
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="开机自启动" tabindex="-1"><a class="header-anchor" href="#开机自启动" aria-hidden="true">#</a> 开机自启动</h2><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token function">docker</span> update <span class="token parameter variable">--restart</span><span class="token operator">=</span>always <span class="token variable"><span class="token variable">$(</span><span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-qa</span><span class="token variable">)</span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2 id="伪装网站" tabindex="-1"><a class="header-anchor" href="#伪装网站" aria-hidden="true">#</a> 伪装网站</h2><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code>iptables <span class="token parameter variable">-t</span> nat <span class="token parameter variable">-A</span> PREROUTING <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">--dport</span> <span class="token number">40000</span>:50000 <span class="token parameter variable">-j</span> REDIRECT --to-ports <span class="token number">443</span>
+<span class="token function">git</span> clone https://github.com/star574/camouflage_html.git <span class="token builtin class-name">.</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="一键脚本" tabindex="-1"><a class="header-anchor" href="#一键脚本" aria-hidden="true">#</a> 一键脚本</h2><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/usr/bin/env bash</span>
+<span class="token builtin class-name">set</span> <span class="token parameter variable">-e</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;close ipv6&quot;</span>
+
+<span class="token function">cat</span> <span class="token operator">&lt;&lt;</span><span class="token string">EOF<span class="token bash punctuation"> <span class="token operator">&gt;&gt;</span> /etc/sysctl.conf</span>
+# Disable IPv6
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+EOF</span>
+
+<span class="token comment"># 立即生效</span>
+<span class="token function">sysctl</span> <span class="token parameter variable">-p</span> /etc/sysctl.conf
+
+<span class="token assign-left variable">domain</span><span class="token operator">=</span><span class="token variable">$1</span>
+<span class="token assign-left variable">uuid</span><span class="token operator">=</span><span class="token variable">${2<span class="token operator">:-</span>$(uuidgen)}</span>
+<span class="token assign-left variable">port</span><span class="token operator">=</span><span class="token variable">${3<span class="token operator">:-</span>8089}</span>
+<span class="token assign-left variable">ws_path</span><span class="token operator">=</span><span class="token variable">${uuid<span class="token operator">##</span>*-}</span>
+<span class="token assign-left variable">email</span><span class="token operator">=</span><span class="token variable">${uuid<span class="token operator">%%</span>-*}</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;Using UUID: <span class="token variable">$uuid</span>&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;Using Port: <span class="token variable">$port</span>&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;Using ws_path: <span class="token variable">$ws_path</span>&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;Using domain: <span class="token variable">$domain</span>&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;Using email: <span class="token variable">$email</span>&quot;</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;setup timezone...&quot;</span>
+timedatectl set-timezone Asia/Shanghai
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;setup speedtest...&quot;</span>
+<span class="token function">wget</span> https://raw.github.com/sivel/speedtest-cli/master/speedtest.py
+<span class="token function">chmod</span> a+rx speedtest.py
+<span class="token function">mv</span> speedtest.py /usr/local/bin/speedtest
+<span class="token function">chown</span> root:root /usr/local/bin/speedtest
+
+<span class="token function">ln</span> <span class="token parameter variable">-sf</span> /usr/bin/python3  /usr/bin/python
+
+<span class="token function">wget</span> <span class="token parameter variable">-O</span> tcp.sh <span class="token string">&quot;https://git.io/coolspeeda&quot;</span> <span class="token operator">&amp;&amp;</span> <span class="token function">chmod</span> +x tcp.sh
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;install docker...&quot;</span>
+<span class="token function">apt</span> remove <span class="token function">docker</span> docker-engine docker.io containerd runc <span class="token operator">||</span> <span class="token boolean">true</span>
+
+<span class="token function">apt</span> update <span class="token parameter variable">--yes</span>
+
+<span class="token function">apt</span> <span class="token function">install</span> apt-transport-https ca-certificates <span class="token function">curl</span> gnupg lsb-release <span class="token parameter variable">--yes</span>
+
+<span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://download.docker.com/linux/debian/gpg <span class="token operator">|</span> gpg <span class="token parameter variable">--dearmor</span> <span class="token parameter variable">-o</span> /usr/share/keyrings/docker-archive-keyring.gpg
+
+<span class="token builtin class-name">echo</span> <span class="token punctuation">\</span>
+  <span class="token string">&quot;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+  <span class="token variable"><span class="token variable">$(</span>lsb_release <span class="token parameter variable">-cs</span><span class="token variable">)</span></span> stable&quot;</span> <span class="token operator">|</span> <span class="token function">tee</span> /etc/apt/sources.list.d/docker.list <span class="token operator">&gt;</span> /dev/null
+
+<span class="token function">apt</span> update <span class="token parameter variable">--yes</span>
+
+<span class="token function">apt</span> <span class="token function">install</span> docker-ce docker-ce-cli containerd.io <span class="token parameter variable">--yes</span>
+
+systemctl <span class="token builtin class-name">enable</span> <span class="token parameter variable">--now</span> <span class="token function">docker</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;setup xray...&quot;</span>
+<span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /docker/xray <span class="token operator">&amp;&amp;</span> <span class="token function">touch</span> /docker/xray/config.json
+
+<span class="token function">cat</span> <span class="token operator">&lt;&lt;</span><span class="token string">EOF<span class="token bash punctuation"> <span class="token operator">&gt;</span>  /docker/xray/config.json</span>
+{
+  &quot;log&quot;: {
+    &quot;loglevel&quot;: &quot;error&quot;
+  },
+  &quot;routing&quot;: {
+    &quot;domainStrategy&quot;: &quot;IPOnDemand&quot;,
+    &quot;rules&quot;: [
+      {
+        &quot;type&quot;: &quot;field&quot;,
+        &quot;ip&quot;: [
+          &quot;geoip:private&quot;,
+          &quot;geoip:cn&quot;
+        ],
+        &quot;outboundTag&quot;: &quot;block&quot;
+      },
+      {
+        &quot;type&quot;: &quot;field&quot;,
+        &quot;protocol&quot;: [
+          &quot;bittorrent&quot;
+        ],
+        &quot;outboundTag&quot;: &quot;block&quot;
+      }
+    ]
+  },
+  &quot;inbounds&quot;: [
+    {
+      &quot;port&quot;: <span class="token variable">$port</span>,
+      &quot;listen&quot;: &quot;0.0.0.0&quot;,
+      &quot;protocol&quot;: &quot;vless&quot;,
+      &quot;settings&quot;: {
+        &quot;clients&quot;: [
+          {
+            &quot;id&quot;: &quot;<span class="token variable">$uuid</span>&quot;
+          }
+        ],
+        &quot;decryption&quot;: &quot;none&quot;
+      },
+      &quot;streamSettings&quot;: {
+        &quot;network&quot;: &quot;ws&quot;,
+        &quot;security&quot;: &quot;none&quot;,
+        &quot;wsSettings&quot;: {
+          &quot;path&quot;: &quot;/<span class="token variable">$ws_path</span>&quot;
+        }
+      }
+    }
+  ],
+  &quot;outbounds&quot;: [
+    {
+      &quot;protocol&quot;: &quot;freedom&quot;,
+      &quot;settings&quot;: {
+        &quot;domainStrategy&quot;: &quot;AsIs&quot;
+      },
+      &quot;tag&quot;: &quot;direct&quot;
+    },
+    {
+      &quot;protocol&quot;: &quot;blackhole&quot;,
+      &quot;tag&quot;: &quot;block&quot;
+    }
+  ]
+}
+EOF</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;install xray of docker...&quot;</span>
+<span class="token function">docker</span> <span class="token function">rm</span> <span class="token parameter variable">-f</span> xray <span class="token operator">||</span> <span class="token boolean">true</span>
+<span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">-p</span> <span class="token variable">$port</span><span class="token builtin class-name">:</span><span class="token variable">$port</span> <span class="token parameter variable">--name</span> xray <span class="token parameter variable">--restart</span><span class="token operator">=</span>always <span class="token parameter variable">-v</span> /docker/xray:/etc/xray <span class="token parameter variable">-v</span> /etc/localtime:/etc/localtime teddysun/xray
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;setup caddy...&quot;</span>
+
+<span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /docker/caddy/html
+<span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /docker/caddy/data
+<span class="token function">touch</span> /docker/caddy/Caddyfile
+
+<span class="token function">cat</span> <span class="token operator">&lt;&lt;</span><span class="token string">EOF<span class="token bash punctuation"> <span class="token operator">&gt;</span>  /docker/caddy/Caddyfile</span>
+<span class="token variable">$domain</span> {
+  tls <span class="token variable">$email</span>@gmail.com
+
+  # 静态资源
+  root * /srv
+  file_server
+  encode gzip
+
+  # 日志更详细
+  log {
+    output file /etc/caddy/caddy.log {
+      roll_size 10mb
+      roll_keep 10
+      roll_keep_for 720h
+    }
+  }
+
+  # WebSocket 转发给 xray
+  @xray_websocket {
+    path /<span class="token variable">$ws_path</span>
+  }
+  reverse_proxy @xray_websocket 127.0.0.1:<span class="token variable">$port</span>
+}
+EOF</span>
+
+<span class="token function">docker</span> <span class="token function">rm</span> <span class="token parameter variable">-f</span> caddy <span class="token operator">||</span> <span class="token boolean">true</span>
+
+<span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">--network</span><span class="token operator">=</span>host <span class="token punctuation">\</span>
+    <span class="token parameter variable">-v</span> /docker/caddy/html:/srv <span class="token punctuation">\</span>
+    <span class="token parameter variable">-v</span> /docker/caddy/data:/data <span class="token punctuation">\</span>
+    <span class="token parameter variable">-v</span> /docker/caddy/Caddyfile:/etc/caddy/Caddyfile <span class="token punctuation">\</span>
+    <span class="token parameter variable">-v</span> /etc/localtime:/etc/localtime <span class="token punctuation">\</span>
+    <span class="token parameter variable">--name</span> caddy caddy
+
+
+<span class="token function">docker</span> update <span class="token parameter variable">--restart</span><span class="token operator">=</span>always <span class="token variable"><span class="token variable">$(</span><span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-qa</span><span class="token variable">)</span></span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;setup forward...&quot;</span>
+
+iptables <span class="token parameter variable">-t</span> nat <span class="token parameter variable">-A</span> PREROUTING <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">--dport</span> <span class="token number">40000</span>:50000 <span class="token parameter variable">-j</span> REDIRECT --to-ports <span class="token number">443</span>
+
+<span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /etc/iptables
+iptables-save <span class="token operator">&gt;</span> /etc/iptables/forward.rules
+
+<span class="token comment"># 每次开机加载</span>
+<span class="token function">cat</span> <span class="token operator">&lt;&lt;</span><span class="token string">EOF<span class="token bash punctuation"> <span class="token operator">&gt;</span> /etc/systemd/system/iptables-forward.service</span>
+[Unit]
+Description=Restore iptables port forwarding
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/iptables-restore &lt; /etc/iptables/forward.rules
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+EOF</span>
+
+<span class="token comment"># 启用开机自启</span>
+systemctl daemon-reload
+systemctl <span class="token builtin class-name">enable</span> iptables-forward
+systemctl start iptables-forward
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;setup web...&quot;</span>
+
+<span class="token function">git</span> clone https://github.com/star574/camouflage_html.git /docker/caddy/html
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;done&quot;</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;domain: <span class="token variable">$domain</span>&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;port: <span class="token variable">$port</span>&quot;</span> 
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;uuid: <span class="token variable">$uuid</span>&quot;</span> 
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;ws_path: <span class="token variable">$ws_path</span>&quot;</span> 
+
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></div><!--[--><!--]--></div><footer class="page-meta"><!----><div class="meta-item last-updated"><span class="meta-item-label">Last Updated: </span><!----></div><div class="meta-item contributors"><span class="meta-item-label">Contributors: </span><span class="meta-item-info"><!--[--><!--[--><span class="contributor" title="email: 64851230+star574@users.noreply.github.com">star574</span><!--[-->, <!--]--><!--]--><!--[--><span class="contributor" title="email: shihengluo574@gmail.com">star574</span><!----><!--]--><!--]--></span></div></footer><!----><!--[--><!--]--></main><!--]--></div><!----><!--]--></div>
+    <script type="module" src="/assets/app.3ba3e4b9.js" defer></script>
+  </body>
+</html>
