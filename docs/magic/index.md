@@ -86,83 +86,64 @@ mkdir -p /docker/xray && touch /docker/xray/config.json
 ```shell
 cat <<EOF >  /docker/xray/config.json
 {
-    "log": {
-        "loglevel": "warning"
-    },
-    "api": null,
-    "routing": {
-        "domainStrategy": "IPOnDemand",
-        "rules": [
-            {
-                "type": "field",
-                "ip": [
-                    "geoip:private",
-		    "0.0.0.0/8",
-                    "10.0.0.0/8",
-                    "100.64.0.0/10",
-                    "127.0.0.0/8",
-                    "169.254.0.0/16",
-                    "172.16.0.0/12",
-                    "192.0.0.0/24",
-                    "192.0.2.0/24",
-                    "192.168.0.0/16",
-                    "198.18.0.0/15",
-                    "198.51.100.0/24",
-                    "203.0.113.0/24",
-                    "::1/128",
-                    "fc00::/7",
-                    "fe80::/10"
-                ],
-                "outboundTag": "blocked"
-            },
-	    {
-                "type": "field",
-                "protocol": [
-                    "bittorrent"
-                ],
-                "outboundTag": "blocked"
-            }
-        ]
-    },
-    "policy": {},
-    "inbounds": [
-        {
-            "port": $PORT, 
-            "listen": "0.0.0.0",
-            "protocol": "vless",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "$UUID"
-                    }
-                ],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "ws",
-                "security": "none",
-                "wsSettings": {
-                    "path": "/$PATH"
-                }
-            }
+  "log": {
+    "loglevel": "error"
+  },
+  "routing": {
+    "domainStrategy": "IPOnDemand",
+    "rules": [
+      {
+        "type": "field",
+        "ip": [
+          "geoip:private",
+          "geoip:cn"
+        ],
+        "outboundTag": "block"
+      },
+      {
+        "type": "field",
+        "protocol": [
+          "bittorrent"
+        ],
+        "outboundTag": "block"
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "port": $PORT,
+      "listen": "0.0.0.0",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "path": "/$PATH"
         }
-    ],
-    "outbounds": [
-        {
-            "protocol": "freedom",
-            "settings": {
-                "domainStrategy": "UseIP"
-            },
-            "tag": "direct"
-        },
-        {
-            "protocol": "blackhole",
-            "tag": "block"
-        }
-    ],
-    "transport": {},
-    "stats": null,
-    "reverse": {}
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "AsIs"
+      },
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "tag": "block"
+    }
+  ]
 }
 EOF
 ```
@@ -191,19 +172,29 @@ touch /docker/caddy/Caddyfile
 
 ```shell
 cat <<EOF >  /docker/caddy/Caddyfile
-$DOMAIN1 $DOMAIN2 {
-  tls $EMAIL 
-  file_server
+$DOMAIN1, $DOMAIN2 {
+  tls $EMAIL
+
+  # 静态资源
   root * /srv
+  file_server
+  encode gzip
+
+  # 日志更详细
   log {
-        output file /etc/caddy/caddy.log
+    output file /etc/caddy/caddy.log {
+      roll_size 10mb
+      roll_keep 10
+      roll_keep_for 720h
+    }
+    format single_field common_log
   }
+
+  # WebSocket 转发给 xray
   @xray_websocket {
-        path /$PATH
-        header Connection Upgrade
-        header Upgrade websocket
-   }
-   reverse_proxy @xray_websocket $NAME:$PORT
+    path /$PATH
+  }
+  reverse_proxy @xray_websocket $NAME:$PORT
 }
 EOF
 ```
